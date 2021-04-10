@@ -1,15 +1,35 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>PAD</title>
+    <title>Bookers2-Ver.4</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <%= yield %>
+    <%= render 'layouts/header' %>
+      <main>
+      <div class="container m-3">
+        <div class="row">
+          <div class="mx-auto">
+            <% if user_signed_in? %>
+              <%= form_with(url: search_path, method: :get, local: true) do |f| %>
+                <%= f.text_field :word %>
+                <%= f.select :range, [['User', '1'],['Book', '2']] %>
+                <%= f.select :search,[["完全一致","perfect_much"],["前方一致","forward_mach"],["後方一致","backward_mach"],["部分一致","pertical_mach"]] %>
+                <%= f.submit '検索'  %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+        <p id="notice"><%= notice %></p>
+        <!--[5. ヘッダー以外のレイアウトが表示されない] yieldが表記されていないと画面に表示されない-->
+        <%=yield %>
+      </main>
+    <%= render 'layouts/footer' %>
   </body>
 </html>

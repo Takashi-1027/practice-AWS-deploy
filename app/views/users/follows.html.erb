@@ -1,0 +1,29 @@
+<!--<div class='container px-5 px-sm-0'>-->
+  <div class='row'>
+    <div class='col-md-8 offset-md-1'>
+      <table class='table follows_table'>
+        <h2>Follows Uses</h2>
+        <thead>
+          <tr>
+            <th>image</th>
+            <th>name</th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% users = @user.follower %>
+          <% users.each do |user| %>
+          <tr>
+            <td><%= attachment_image_tag(user.followed, :profile_image, :fill, 50, 50, fallback: "no-image-icon.jpg") %></td>
+            <td><%= user.followed.name %></td>
+            <td><%= link_to 'Show', user_path(user.followed), class: "user_#{user.followed.id}" %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<!--</div>-->

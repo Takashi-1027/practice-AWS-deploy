@@ -1,0 +1,15 @@
+<% if book.favorited_by?(current_user) %> <!-- <= favorited_by? は models/book.rbに定義している-->
+
+    <%= link_to book_favorites_path(book), method: :delete, remote: true do %>
+    <!--< %= link_to book.favorites.count, book_favorites_path(book), method: :delete, class: "fas fa-heart heart_red" %>-->
+    <p class= "fas fa-heart heart_red"><%= book.favorites.count %> いいね</p>
+    <% end %>
+
+<% else %>
+
+    <%= link_to book_favorites_path(book), method: :post, remote: true do %>   <!--, remote: true do -->
+    <!--< %= link_to book.favorites.count, book_favorites_path(book), method: :post,  class: "fas fa-heart heart_blue" %>-->
+    <p class="fas fa-heart heart_blue"><%= book.favorites.count%> いいね</p>
+    <% end %>
+
+<% end %>
